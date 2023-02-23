@@ -8,7 +8,8 @@ module.exports = {
       references: {
         model: 'Users',
         key: 'id'
-  }})
+  }
+ })
 },
 
   down: (queryInterface, Sequelize) => {
