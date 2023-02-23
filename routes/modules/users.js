@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const passsport = require('passport')
 const bcrypt = require('bcryptjs')
-
-const User = require('../../models/user')
+const db = require('../../models')
+const User = db.User
 
 router.get('/login', (req, res) =>{
   res.render('login')
@@ -11,7 +11,7 @@ router.get('/login', (req, res) =>{
 
 router.post('/login', passsport.authenticate('local',{
  successRedirect: '/',
- failureRedirect:'users/login'
+ failureRedirect:'/users/login'
 }))
 
 router.get('/register', (req, res) =>{
@@ -22,7 +22,6 @@ router.post('/register', (req, res) => {
   // 取得註冊表單參數
   const { name, email, password, confirmPassword } = req.body
   // 檢查使用者是否已經註冊
-
   const errors = []
 
   if(!name || !email || !password || !confirmPassword){
@@ -43,8 +42,9 @@ router.post('/register', (req, res) => {
 
   User.findOne({ where: { email } }).then(user => {
     if (user) {
-      console.log('User already exists')
+       errors.push({ message: '這個 Email 已經註冊過了!' })
       return res.render('register', {
+        errors,
         name,
         email,
         password,

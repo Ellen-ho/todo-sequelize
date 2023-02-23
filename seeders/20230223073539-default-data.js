@@ -6,6 +6,7 @@ const SEED_USER = {
   email: 'root@example.com',
   password: '12345678'
 }
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [{

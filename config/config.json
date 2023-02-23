@@ -4,8 +4,7 @@
     "password": "password",
     "database": "todo_sequelize",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "isDone": true
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
